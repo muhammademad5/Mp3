@@ -47,17 +47,21 @@ function playSong() {
     ttl.classList.toggle('run'); 
     playing.classList.toggle('none');
     pauses.classList.toggle('none');
+    // art_img.classList.toggle('round--play');
     art_img.classList.toggle('round--pause');
     displaySongDuration();
 }
 
-function removeEffect() {
+function resetEffect() {
     ad.pause();
     ad.currentTime = 0.01; 
     ttl.classList.remove('run');
     playing.classList.remove('none');
     pauses.classList.add('none');
-    art_img.classList.remove('round--pause');
+    /******************remove*************************** */
+    art_img.classList.add('round--pause');
+    /************************************* */
+    resetAnimation();
 }
 
 var x = 0;
@@ -67,7 +71,7 @@ function backward() {
     if (x < 0) { 
         x = artist_name.length - 1;
     }
-    removeEffect();
+    resetEffect();
     setSong(x);
 }
 
@@ -76,7 +80,7 @@ function forward() {
     if (x >= artist_name.length) { 
         x = 0;
     }
-    removeEffect();
+    resetEffect();
     setSong(x);
 }
 
@@ -87,6 +91,7 @@ function setSong(x) {
     art_img.src = `assets/${x}.jpg`;
     ad.src = `assets/${x}.mp3`;
     ad.addEventListener('loadedmetadata', displaySongDuration);
+    resetAnimation();
 }
 
 setSong(0);
@@ -109,4 +114,10 @@ function updateTimer() {
 function updateProgress() {
     const widthbar = (ad.currentTime / ad.duration) * 100 || 0; 
     lines.style.width = `${widthbar}%`;
+}
+
+function resetAnimation() {
+    art_img.style.animation = 'none';
+    art_img.offsetHeight; 
+    art_img.style.animation = null;
 }
