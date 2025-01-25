@@ -88,6 +88,10 @@ body{
     animation-play-state: running;
 }
 
+/* .round--play {
+    animation-play-state: running;
+} */
+
 .round--pause {
     animation-play-state: paused;
 }
